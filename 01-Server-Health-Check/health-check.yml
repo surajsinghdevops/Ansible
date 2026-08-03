@@ -1,0 +1,40 @@
+---
+- name: Server Health Check
+  hosts: web
+  become: false
+  gather_facts: yes
+
+  tasks:
+
+    - name: Get uptime
+      command: uptime -p
+      register: uptime
+
+    - name: Get memory usage
+      shell: free -m
+      register: memory
+
+    - name: Get disk usage
+      command: df -h
+      register: disk
+
+    - name: Get logged in users
+      command: who
+      register: users
+
+    - name: Display Health Report
+      debug:
+        msg:
+          - "Hostname       : {{ ansible_hostname }}"
+          - "IP Address     : {{ ansible_default_ipv4.address }}"
+          - "Operating System: {{ ansible_distribution }} {{ ansible_distribution_version }}"
+          - "Kernel Version : {{ ansible_kernel }}"
+          - "CPU            : {{ ansible_processor_vcpus }} vCPU(s)"
+          - "RAM            : {{ ansible_memtotal_mb }} MB"
+          - "Uptime         : {{ uptime.stdout }}"
+          - "Disk Usage"
+          - "{{ disk.stdout_lines }}"
+          - "Memory Usage"
+          - "{{ memory.stdout_lines }}"
+          - "Logged In Users"
+          - "{{ users.stdout_lines }}"
