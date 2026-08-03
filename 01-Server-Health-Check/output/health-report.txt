@@ -1,0 +1,22 @@
+TASK [Display Health Report]
+
+ok: [172.31.10.25] =>
+
+Hostname        : ansible-slave
+IP Address      : 172.31.10.25
+Operating System: Amazon Linux 2023
+Kernel Version  : 6.x.x
+CPU             : 2 vCPU(s)
+RAM             : 976 MB
+Uptime          : up 2 hours, 10 minutes
+
+Disk Usage
+Filesystem      Size Used Avail Use%
+/dev/xvda1       20G 2.5G 18G 14%
+
+Memory Usage
+total used free shared buff/cache available
+976 240 420 5 315 620
+
+Logged In Users
+root pts/0
